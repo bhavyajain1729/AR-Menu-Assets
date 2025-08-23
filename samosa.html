@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>My AR Pizza Viewer</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.5.0/model-viewer.min.js"></script>
+    
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            font-family: sans-serif;
+        }
+        model-viewer {
+            width: 100%;
+            height: 100%;
+            --ar-button-display: none; /* We hide the default button to use our own */
+        }
+        #ar-button {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: linear-gradient(90deg, #ff8c00, #ff4500);
+            color: white;
+            padding: 15px 30px;
+            border-radius: 50px;
+            font-weight: bold;
+            font-size: 18px;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+    </style>
+</head>
+<body>
+
+    <model-viewer
+        id="food-model"
+        src="https://raw.githubusercontent.com/bhavyajain1729/AR-Menu-Assets/main/16ed82e5-bee8-44c2-888a-e87502207c72.glb"
+        alt="A 3D model of a pizza"
+        ar
+        ar-modes="webxr scene-viewer quick-look"
+        camera-controls
+        auto-rotate
+        shadow-intensity="1.5">
+    </model-viewer>
+
+    <button id="ar-button">View in Your Space</button>
+
+    <script>
+        // This simple script makes our custom button work
+        const modelViewer = document.querySelector('#food-model');
+        document.querySelector('#ar-button').addEventListener('click', () => modelViewer.activateAR());
+    </script>
+</body>
+
+</html>
